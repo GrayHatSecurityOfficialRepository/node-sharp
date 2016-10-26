@@ -1,40 +1,12 @@
-net = require('net')
-
-// Supports multiple client chat application
-
-// Keep a pool of sockets ready for everyone
-// Avoid dead sockets by responding to the 'end' event
-var sockets = [];
-
-// Create a TCP socket listener
-var s = net.Server(function (socket) {
-
-    // Add the new client socket connection to the array of
-    // sockets
-    sockets.push(socket);
-
-    // 'data' is an event that means that a message was just sent by the 
-    // client application
-    socket.on('data', function (msg_sent) {
-        // Loop through all of our sockets and send the data
-        for (var i = 0; i < sockets.length; i++) {
-            // Don't send the data back to the original sender
-            //if (sockets[i] == socket) // don't send the message to yourself
-                //continue;
-            // Write the msg sent by chat client
-            sockets[i].write(msg_sent);
-            sockets[i].write('hallo');
-        }
-    });
-    // Use splice to get rid of the socket that is ending.
-    // The 'end' event means tcp client has disconnected.
-    socket.on('end', function () {
-        var i = sockets.indexOf(socket);
-        sockets.splice(i, 1);
-    });
-socket.on('error', function() { });
-
+// Load the http module to create an http server.
+var http = require('http');
+ 
+// Configure our HTTP server to respond with Hello World to all requests.
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World\n");
 });
-
-s.listen(8000);
-console.log('System waiting at http://localhost:8000');
+ 
+// Listen on port 8000, IP defaults to 127.0.0.1
+server.listen(80);
+console.log('System waiting at http://localhost:80');
