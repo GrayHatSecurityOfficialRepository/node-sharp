@@ -31,8 +31,7 @@ var s = net.Server(function (socket) {
         var i = sockets.indexOf(socket);
         sockets.splice(i, 1);
     });
-
-
+    socket.on('error', function() { });
 });
 
 s.listen(8000);
