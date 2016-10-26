@@ -1,0 +1,11 @@
+{
+  "name": "node-sharp",
+  "version": "0.3.4",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "dependencies": {
+    "ejs": "2.4.1",
+    "express": "4.13.3"
+  }
+}
