@@ -19,10 +19,11 @@ var s = net.Server(function (socket) {
         // Loop through all of our sockets and send the data
         for (var i = 0; i < sockets.length; i++) {
             // Don't send the data back to the original sender
-            if (sockets[i] == socket) // don't send the message to yourself
-                continue;
+            //if (sockets[i] == socket) // don't send the message to yourself
+                //continue;
             // Write the msg sent by chat client
             sockets[i].write(msg_sent);
+            sockets[i].write('hallo');
         }
     });
     // Use splice to get rid of the socket that is ending.
